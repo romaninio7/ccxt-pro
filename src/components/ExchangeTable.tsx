@@ -40,7 +40,7 @@ const ExchangeTable: React.FunctionComponent<IExchangeTable> = ({
 
   return (
     <>
-      <div className="ui four column doubling stackable grid container segment">
+      <div className="ui two column doubling stackable grid container segment">
         <div className="column">
           <h3>Bids</h3>
 
@@ -51,11 +51,9 @@ const ExchangeTable: React.FunctionComponent<IExchangeTable> = ({
           {displayTable(asks)}
         </div>
       </div>
-      {loading && (
-        <div className="ui inverted segment">
-          <div className="ui active inverted loader"></div>
-        </div>
-      )}
+      <div style={{ minHeight: 50 }}>
+        {loading && <div className="ui active centered inline loader"></div>}
+      </div>
       {error && <div>{error}</div>}
     </>
   );
