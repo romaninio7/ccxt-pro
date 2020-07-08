@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { getStockData } from "actions";
 import useInterval from "components/hooks/useInterval";
@@ -15,10 +15,6 @@ const ExchangeTable: React.FunctionComponent<IExchangeTable> = ({
   loading,
   error,
 }): JSX.Element => {
-  // useEffect(() => {
-  //   getStockData();
-  // }, [getStockData]);
-
   useInterval(getStockData, 1000);
 
   const displayTable = (inputArray: [string, string][]) => {
@@ -60,6 +56,7 @@ const ExchangeTable: React.FunctionComponent<IExchangeTable> = ({
           <div className="ui active inverted loader"></div>
         </div>
       )}
+      {error && <div>{error}</div>}
     </>
   );
 };

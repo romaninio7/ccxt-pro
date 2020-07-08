@@ -1,12 +1,13 @@
 import { ActionTypes } from "actions/types";
 import ccxtAPI from "api/ccxtAPI";
+import { Dispatch } from "redux";
+import { OrderBook } from "ccxt";
 
-export const getStockData = () => async (dispatch) => {
+export const getStockData = () => async (dispatch: Dispatch) => {
   dispatch({ type: ActionTypes.API_REQUEST });
 
   try {
-    const response = await ccxtAPI();
-    console.log(response);
+    const response: OrderBook = await ccxtAPI();
 
     dispatch({
       type: ActionTypes.API_SUCCESS,

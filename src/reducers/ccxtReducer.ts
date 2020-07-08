@@ -1,23 +1,28 @@
 import { ActionTypes } from "actions/types";
-// import { IDishesState, FetchDishesAction } from "interfaces";
-//import * as consts from "consts";
+import { IState } from "interfaces";
+import { Action } from "redux";
 
-const initialState = {
-  fetching: false,
-  asks: [],
-  bids: [],
+const initialState: IState = {
+  loading: false,
+  asks: ["", ""],
+  bids: ["", ""],
   error: "",
 };
 
-export default (state = initialState, action) => {
+interface IAction extends Action {
+  payload: any;
+  error: string;
+}
+
+export default (state = initialState, action: IAction) => {
   switch (action.type) {
     case ActionTypes.API_REQUEST:
-      return { ...state, fetching: true };
+      return { ...state, loading: true };
 
     case ActionTypes.API_SUCCESS:
       return {
         ...state,
-        fetching: false,
+        loading: false,
         bids: action.payload.bids,
         asks: action.payload.asks,
       };
@@ -25,7 +30,7 @@ export default (state = initialState, action) => {
     case ActionTypes.API_FAILURE:
       return {
         ...state,
-        fetching: false,
+        loading: false,
         error: action.error,
       };
     default:
